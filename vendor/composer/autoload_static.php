@@ -11,6 +11,11 @@ class ComposerStaticInitebb13bef74c4b3c989e8a873318f7917
     );
 
     public static $prefixLengthsPsr4 = array (
+        'T' => 
+        array (
+            'Tienda\\App\\Libs\\' => 16,
+            'Tienda\\App\\Controllers\\' => 23,
+        ),
         'F' => 
         array (
             'FastRoute\\' => 10,
@@ -18,6 +23,14 @@ class ComposerStaticInitebb13bef74c4b3c989e8a873318f7917
     );
 
     public static $prefixDirsPsr4 = array (
+        'Tienda\\App\\Libs\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/app/libs',
+        ),
+        'Tienda\\App\\Controllers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/app/controllers',
+        ),
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',

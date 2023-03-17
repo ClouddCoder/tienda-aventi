@@ -19,7 +19,7 @@ class DocumentController extends Controller
 
     public function register()
     {
-        $this->render('login');
+        $this->render('register');
     }
 
     public function editEmail()
