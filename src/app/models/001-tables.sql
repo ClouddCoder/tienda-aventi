@@ -14,3 +14,11 @@ CREATE TABLE user (
     PRIMARY KEY (id),
     FOREIGN KEY (role_id) REFERENCES user_role(id)
 );
+
+CREATE TABLE product (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    price INT NOT NULL,
+    stock INT NOT NULL,
+    PRIMARY KEY (id)
+);
