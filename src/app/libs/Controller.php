@@ -2,21 +2,12 @@
 
 namespace Tienda\App\Libs;
 
-class Controller extends Redirect
+class Controller extends Session
 {
     protected function render(string $path): void
     {
-
-        if (str_contains($path, '.')) {
-            $path = str_replace('.', '/', $path);
-
-            if ($this->verifyPath($path)) {
-                require_once __DIR__ . '/../../views/' . $path . '.phtml';
-            }
-        } else {
-            if ($this->verifyPath($path)) {
-                require_once __DIR__ . '/../../views/' . $path . '.phtml';
-            }
+        if ($this->verifyPath($path)) {
+            require_once __DIR__ . '/../../views/' . $path . '.phtml';
         }
     }
 
