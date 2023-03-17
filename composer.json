@@ -1,4 +1,10 @@
 {
+    "autoload": {
+        "psr-4": {
+            "Tienda\\App\\Controllers\\": "src/app/controllers",
+            "Tienda\\App\\Libs\\": "src/app/libs"
+        }
+    },
     "require": {
         "nikic/fast-route": "^1.3"
     }
