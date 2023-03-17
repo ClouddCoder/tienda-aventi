@@ -12,7 +12,10 @@ class UserController extends Controller
         if ($_POST['email'] == 'admin@admin.com' && $_POST['password'] == 'admin') {
             $this->route('/user-profile');
         } else {
-            $this->route('/login');
+            echo '<script>
+                alert("Usuario o contraseña incorrectos");
+                window.location.href = "/login";
+                </script>';
         }
     }
 
