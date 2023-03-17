@@ -26,6 +26,9 @@ services:
       MYSQL_DATABASE: "${DB_NAME}"
       MYSQL_USER: "${DB_USER}"
       MYSQL_PASSWORD: "${DB_PASSWORD}"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./src/app/models/tables.sql:/docker-entrypoint-initdb.d/tables.sql # creates database's tables.
     networks:
       - sail
 
@@ -48,5 +51,5 @@ networks:
     sail:
         driver: bridge
 volumes:
-    sail-mysql:
+    mysql-data:
         driver: local
