@@ -1,12 +1,14 @@
 <?php
 
 use Tienda\App\Controllers\DocumentController;
+use Tienda\App\Controllers\UserController;
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $router) {
 
     $router->get('/', [DocumentController::class, 'index']);
     $router->get('/register', [DocumentController::class, 'register']);
     $router->get('/login', [DocumentController::class, 'login']);
+    $router->post('/login-data', [UserController::class, 'login']);
     $router->get('/user-profile', [DocumentController::class, 'userProfile']);
     $router->get('/edit-email', [DocumentController::class, 'editEmail']);
     $router->get('/edit-password', [DocumentController::class, 'editPassword']);

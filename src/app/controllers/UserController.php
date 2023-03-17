@@ -4,12 +4,16 @@ namespace Tienda\App\Controllers;
 
 use Tienda\App\Libs\Controller;
 
-class DocumentController extends Controller
+class UserController extends Controller
 {
 
     public function login()
     {
-        $this->render('index');
+        if ($_POST['email'] == 'admin@admin.com' && $_POST['password'] == 'admin') {
+            $this->route('/user-profile');
+        } else {
+            $this->route('/login');
+        }
     }
 
     public function register()

@@ -2,7 +2,7 @@
 
 namespace Tienda\App\Libs;
 
-class Controller extends Session
+class Controller extends Redirect
 {
     protected function render(string $path): void
     {
