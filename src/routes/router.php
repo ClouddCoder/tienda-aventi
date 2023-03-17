@@ -14,7 +14,6 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $router->get('/edit-phone', [DocumentController::class, 'editPhone']);
 });
 
-
 $httpMethod = $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
 
