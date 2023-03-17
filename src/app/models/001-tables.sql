@@ -1,5 +1,6 @@
 CREATE TABLE user_role (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
+    role VARCHAR(25) NOT NULL,
     PRIMARY KEY (id)
 );
 

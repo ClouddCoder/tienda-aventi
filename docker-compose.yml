@@ -28,7 +28,9 @@ services:
       MYSQL_PASSWORD: "${DB_PASSWORD}"
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./src/app/models/tables.sql:/docker-entrypoint-initdb.d/tables.sql # creates database's tables.
+      - ./src/app/models/001-tables.sql:/docker-entrypoint-initdb.d/001-tables.sql # creates database's tables.
+      - ./src/app/models/002-functions.sql:/docker-entrypoint-initdb.d/002-functions.sql # creates database's functions.
+      - ./src/app/models/003-insert.sql:/docker-entrypoint-initdb.d/003-insert.sql
     networks:
       - sail
 
