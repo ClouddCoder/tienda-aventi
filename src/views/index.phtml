@@ -37,6 +37,8 @@
                         </section>
                         <form action="/buy-product" method="POST">
                             <input type="hidden" name="id" value="<?= $product['id'] ?>" />
+                            <input type="hidden" name="stock" value="<?= $product['stock'] ?>" />
+                            <input type="number" name="quantity" placeholder="Cantidad" />
                             <button type="submit">Comprar</button>
                         </form>
                         <form action="/add-to-shopping-cart" method="POST">

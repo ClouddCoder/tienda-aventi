@@ -175,4 +175,69 @@ class ProductController extends Controller
                 </script>';
         }
     }
+
+    public function buyProduct(array $request)
+    {
+        $db = new DB();
+        $pdo = $db->connect();
+
+        if ($request['quantity'] > $request['stock']) {
+            echo '<script>
+                alert("No hay suficiente stock");
+                window.location.href = "/";
+                </script>';
+            return;
+        }
+
+        // Creates a new invoice.
+        $stmtInvoice = $pdo->prepare("INSERT INTO invoice (user_id) VALUES (:user_id)");
+
+        $stmtInvoice->execute([
+            'user_id' => $_SESSION['user_id']
+        ]);
+
+        // Inserts the product purchased into the product_purchased table.
+        $stmtProductPurchased = $pdo->prepare(
+            "INSERT INTO product_purchased (invoice_id, product_id, quantity)
+            VALUES (:invoice_id, :product_id, :quantity)"
+        );
+
+        $stmtProductPurchased->execute([
+            'invoice_id' => $pdo->lastInsertId(),
+            'product_id' => $request['id'],
+            'quantity' => $request['quantity']
+        ]);
+
+        // Updates the product stock.
+        $stmtUpdateProductStock = $pdo->prepare(
+            "UPDATE product SET stock = :stock WHERE id = :id"
+        );
+
+        $stmtUpdateProductStock->execute([
+            'stock' => $request['stock'] - $request['quantity'],
+            'id' => $request['id']
+        ]);
+
+        $count = $stmtUpdateProductStock->rowCount();
+
+        // If the statement was executed successfully and the product exists.
+        if ($stmtProductPurchased) {
+            if ($count > 0) {
+                echo '<script>
+                    alert("Producto comprado");
+                    window.location.href = "/";
+                    </script>';
+            } else {
+                echo '<script>
+                    alert("El producto no existe");
+                    window.location.href = "/";
+                    </script>';
+            }
+        } else {
+            echo '<script>
+                alert("Error al comprar el producto");
+                window.location.href = "/";
+                </script>';
+        }
+    }
 }
