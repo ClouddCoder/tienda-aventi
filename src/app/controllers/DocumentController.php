@@ -9,6 +9,11 @@ class DocumentController extends Controller
 
     public function index()
     {
+        if (!isset($_SESSION['user_id'])) {
+            $this->route('/login');
+            exit;
+        }
+
         $this->render('index');
     }
 
@@ -29,26 +34,51 @@ class DocumentController extends Controller
 
     public function editEmail()
     {
+        if (!isset($_SESSION['user_id'])) {
+            $this->route('/login');
+            exit;
+        }
+
         $this->render('editEmail');
     }
 
     public function editPassword()
     {
+        if (!isset($_SESSION['user_id'])) {
+            $this->route('/login');
+            exit;
+        }
+
         $this->render('editPassword');
     }
 
     public function editUsername()
     {
+        if (!isset($_SESSION['user_id'])) {
+            $this->route('/login');
+            exit;
+        }
+
         $this->render('editUsername');
     }
 
     public function editPhone()
     {
+        if (!isset($_SESSION['user_id'])) {
+            $this->route('/login');
+            exit;
+        }
+
         $this->render('editPhone');
     }
 
     public function userProfile()
     {
+        if (!isset($_SESSION['user_id'])) {
+            $this->route('/login');
+            exit;
+        }
+
         $this->render('userProfile');
     }
 }
