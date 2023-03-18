@@ -14,7 +14,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $router->post('/forgot-password-data', [UserController::class, 'forgotPassword']);
     $router->get('/user-profile', [DocumentController::class, 'userProfile']);
     $router->get('/edit-email', [DocumentController::class, 'editEmail']);
-    $router->put('/edit-email-data', [UserController::class, 'editEmail']);
+    $router->post('/edit-email-data', [UserController::class, 'editEmail']);
     $router->get('/edit-password', [DocumentController::class, 'editPassword']);
     $router->get('/edit-username', [DocumentController::class, 'editUsername']);
     $router->get('/edit-phone', [DocumentController::class, 'editPhone']);
