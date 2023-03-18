@@ -14,9 +14,13 @@
             <h1>Panel de administrador</h1>
         </header>
         <main>
-            <a href="/all-users">Administrar usuarios</a>
-            <a href="/all-supervisors">Administrar supervisores</a>
-            <a href="/all-products">Administrar productos</a>
+            <?php if ($_SESSION['user_id'] == 1) : ?>
+                <a href="/all-users">Administrar usuarios</a>
+                <a href="/all-supervisors">Administrar supervisores</a>
+                <a href="/all-products">Administrar productos</a>
+            <?php elseif ($_SESSION['user_id'] == 2) : ?>
+                <a href="/all-products">Administrar productos</a>
+            <?php endif; ?>
         </main>
     </div>
 </body>
