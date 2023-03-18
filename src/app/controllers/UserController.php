@@ -246,4 +246,39 @@ class UserController extends Controller
 
         $this->render('user-profile');
     }
+
+    public function deleteUser(array $request)
+    {
+        $db = new DB();
+        $pdo = $db->connect();
+
+        $user_id = $request['id'];
+
+        $statement = $pdo->prepare('DELETE FROM user WHERE user.id = :user_id');
+        $statement->execute(['user_id' => $user_id]);
+
+        $count = $statement->rowCount();
+
+        // If the statement was executed successfully and the user exists.
+        if ($statement) {
+            if ($count > 0) {
+                echo '<script>
+                    alert("Usuario eliminado");
+                    window.location.href = "/all-users";
+                    </script>';
+            } else {
+                echo '<script>
+                    alert("El usuario no existe");
+                    window.location.href = "/all-users";
+                    </script>';
+            }
+        } else {
+            echo '<script>
+                alert("Error al eliminar usuario");
+                window.location.href = "/all-users";
+                </script>';
+        }
+
+        $this->render('user-profile');
+    }
 }

@@ -119,12 +119,12 @@ class DocumentController extends Controller
         $pdo = $db->connect();
 
         // Gets all usernames with role of client.
-        $statement = $pdo->prepare("SELECT username FROM user WHERE role_id = 3");
+        $statement = $pdo->prepare("SELECT user.id, username FROM user WHERE role_id = 3");
         $statement->execute();
 
         $users = $statement->fetchAll();
 
-        $data = ['users' => $users[0]];
+        $data = ['users' => $users ?? []];
 
         $this->render('allUsers', $data);
     }
@@ -145,12 +145,12 @@ class DocumentController extends Controller
         $pdo = $db->connect();
 
         // Gets all usernames with role of supervisor.
-        $statement = $pdo->prepare("SELECT username FROM user WHERE role_id = 2");
+        $statement = $pdo->prepare("SELECT user.id, username FROM user WHERE role_id = 2");
         $statement->execute();
 
         $supervisors = $statement->fetchAll();
 
-        $data = ['supervisors' => $supervisors[0]];
+        $data = ['supervisors' => $supervisors ?? []];
 
         $this->render('allSupervisors', $data);
     }
@@ -176,7 +176,7 @@ class DocumentController extends Controller
 
         $products = $statement->fetchAll();
 
-        $data = ['products' => $products[0]];
+        $data = ['products' => $products ?? []];
 
         $this->render('allProducts', $data);
     }

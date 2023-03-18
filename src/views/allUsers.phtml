@@ -14,7 +14,19 @@
             <h1>Todos los usuarios</h1>
         </header>
         <main>
-
+            <?php if (empty($users)) : ?>
+                <p>No hay usuarios registrados.</p>
+            <?php else : ?>
+                <?php foreach ($users as $user) : ?>
+                    <div class="user">
+                        <h2><?= $user['username'] ?></h2>
+                        <form action="/delete-user" method="POST">
+                            <input type="hidden" name="id" value="<?= $user['id'] ?>" />
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </main>
     </div>
 </body>

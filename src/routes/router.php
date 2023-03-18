@@ -23,8 +23,11 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $router->get('/edit-phone', [DocumentController::class, 'editPhone']);
     $router->post('/edit-phone-data', [UserController::class, 'editPhone']);
     $router->get('/all-users', [DocumentController::class, 'allUsers']);
+    $router->post('/delete-user', [UserController::class, 'deleteUser']);
     $router->get('/all-supervisors', [DocumentController::class, 'allSupervisors']);
+    $router->post('/delete-supervisor', [UserController::class, 'deleteSupervisor']);
     $router->get('/all-products', [DocumentController::class, 'allProducts']);
+    $router->post('/delete-product', [UserController::class, 'deleteProduct']);
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];
