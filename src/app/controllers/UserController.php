@@ -40,16 +40,35 @@ class UserController extends Controller
     {
         $db = new DB();
         $pdo = $db->connect();
+        $url = "";
 
         $statement = $pdo->prepare("INSERT INTO user (role_id, username, phone, email, password) VALUES (:role_id, :username, :phone, :email, :password)");
 
-        $statement->execute([
-            'role_id' => $request['id'] ?? 3,
-            'username' => $request['username'],
-            'phone' => $request['phone'],
-            'email' => $request['email'],
-            'password' => $request['password']
-        ]);
+        switch ($request['id']) {
+            case 2:
+                $url = "/all-supervisors";
+                break;
+            default:
+                $url = "/register";
+                break;
+        }
+
+        try {
+            $statement->execute([
+                'role_id' => $request['id'] ?? 3,
+                'username' => $request['username'],
+                'phone' => $request['phone'],
+                'email' => $request['email'],
+                'password' => $request['password']
+            ]);
+        } catch (\PDOException $e) {
+            echo '<script>
+            alert("Error al registrar usuario: ' . $e->getMessage() . '");
+            window.location.href = "' . $url . '";
+            </script>';
+            exit;
+        }
+
 
         // Gets last inserted id.
         $lastInsert = $pdo->prepare("SELECT LAST_INSERT_ID();");
