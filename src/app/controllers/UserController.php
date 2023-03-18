@@ -23,12 +23,12 @@ class UserController extends Controller
             $_SESSION['role_id'] = $user[0]['role_id'];
 
             // If the user is an admin or a supervisor.
-            if ($_SESSION['role_id'] == 1 || $_SESSION['role_id'] == 2) {
-                $this->route('/admin-panel');
+            if ($_SESSION['role_id'] == 3) {
+                $this->route('/');
                 exit;
             }
 
-            $this->route('/');
+            $this->route('/admin-panel');
         } else {
             echo '<script>
                 alert("Usuario o contraseña incorrectos");
@@ -45,15 +45,13 @@ class UserController extends Controller
 
         $statement = $pdo->prepare("INSERT INTO user (role_id, username, phone, email, password) VALUES (:role_id, :username, :phone, :email, :password)");
 
-        if (isset($request['id'])) {
-            switch ($request['id']) {
-                case 2:
-                    $url = "/all-supervisors";
-                    break;
-                default:
-                    $url = "/register";
-                    break;
-            }
+        switch ($request['id']) {
+            case 2:
+                $url = "/all-supervisors";
+                break;
+            default:
+                $url = "/register";
+                break;
         }
 
         try {
@@ -80,15 +78,15 @@ class UserController extends Controller
         $userId = $lastInsert->fetchAll();
 
         if ($userId) {
-            $_SESSION['user_id'] = $userId[0]['LAST_INSERT_ID()'];
-            $_SESSION['role_id'] = $request['id'];
-
             // If the registered user is a supervisor.
-            if (isset($request['id']) && $request['id'] == 2) {
+            if ($request['id'] == 2) {
                 $this->route('/all-supervisors');
                 exit;
             }
 
+            // If the registered user is a client.
+            $_SESSION['user_id'] = $userId[0]['LAST_INSERT_ID()'];
+            $_SESSION['role_id'] = $request['id'];
 
             $this->route('/');
         } else {
