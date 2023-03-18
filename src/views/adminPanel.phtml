@@ -13,6 +13,9 @@
     <div class="container">
         <header>
             <h1>Panel de administrador</h1>
+            <form action="/logout">
+                <button type="submit">Salir</button>
+            </form>
         </header>
         <main>
             <?php if ($_SESSION['user_id'] == 1) : ?>

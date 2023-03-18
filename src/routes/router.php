@@ -16,6 +16,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $router->post('/register-data', [UserController::class, 'register']);
     $router->get('/login', [DocumentController::class, 'login']);
     $router->post('/login-data', [UserController::class, 'login']);
+    $router->get('/logout', [UserController::class, 'logout']);
     $router->get('/forgot-password', [DocumentController::class, 'forgotPassword']);
     $router->post('/forgot-password-data', [UserController::class, 'forgotPassword']);
     $router->get('/user-profile', [DocumentController::class, 'userProfile']);

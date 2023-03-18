@@ -37,6 +37,12 @@ class UserController extends Controller
         }
     }
 
+    public function logout()
+    {
+        session_destroy();
+        $this->route('/login');
+    }
+
     public function register(array $request)
     {
         $db = new DB();
