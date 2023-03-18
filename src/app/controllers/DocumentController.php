@@ -17,6 +17,11 @@ class DocumentController extends Controller
         $this->render('login');
     }
 
+    public function forgotPassword()
+    {
+        $this->render('forgotPassword');
+    }
+
     public function register()
     {
         $this->render('register');

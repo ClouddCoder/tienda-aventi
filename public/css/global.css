@@ -16,7 +16,8 @@ body {
 
 .container,
 .register-form,
-.login-form {
+.login-form,
+.forgot-password-form {
   width: 100%;
   min-height: 100%;
   display: flex;

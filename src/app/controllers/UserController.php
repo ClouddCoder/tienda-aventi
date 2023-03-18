@@ -18,7 +18,7 @@ class UserController extends Controller
 
         $user = $statement->fetchAll();
 
-        if (count($user) > 0) {
+        if ($user) {
             $_SESSION['user_id'] = $user[0]['id'];
 
             $this->route('/user-profile');
@@ -51,7 +51,7 @@ class UserController extends Controller
 
         $userId = $lastInsert->fetchAll();
 
-        if (count($userId) > 0) {
+        if ($userId) {
             $_SESSION['user_id'] = $userId[0]['LAST_INSERT_ID()'];
 
             $this->route('/user-profile');
@@ -65,7 +65,7 @@ class UserController extends Controller
 
     public function editEmail(array $request)
     {
-        $db = new DB;
+        $db = new DB();
         $pdo = $db->connect();
 
         $email = $request['email'];
@@ -75,5 +75,39 @@ class UserController extends Controller
         $statement->execute(['email' => $email, 'user_id' => $user_id]);
 
         $this->render('user-profile');
+    }
+
+    public function forgotPassword(array $request)
+    {
+        $db = new DB();
+        $pdo = $db->connect();
+
+        $email = $request['email'];
+        $newPassword = $request['new-password'];
+
+        $statement = $pdo->prepare('UPDATE user SET password = :new_password WHERE email = :email');
+        $statement->execute(['email' => $email, 'new_password' => $newPassword]);
+
+        $count = $statement->rowCount();
+
+        // If the statement was executed successfully and the email exists.
+        if ($statement) {
+            if ($count > 0) {
+                echo '<script>
+                    alert("Contraseña actualizada");
+                    window.location.href = "/login";
+                    </script>';
+            } else {
+                echo '<script>
+                    alert("El correo no existe");
+                    window.location.href = "/forgot-password";
+                    </script>';
+            }
+        } else {
+            echo '<script>
+                alert("Error al actualizar contraseña");
+                window.location.href = "/forgot-password";
+                </script>';
+        }
     }
 }
