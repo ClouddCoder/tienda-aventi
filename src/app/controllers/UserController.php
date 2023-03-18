@@ -21,6 +21,12 @@ class UserController extends Controller
         if ($user) {
             $_SESSION['user_id'] = $user[0]['id'];
 
+            // If the user is an admin or a supervisor.
+            if ($_SESSION['user_id'] == 1 || $_SESSION['user_id'] == 2) {
+                $this->route('/admin-panel');
+                exit;
+            }
+
             $this->route('/user-profile');
         } else {
             echo '<script>

@@ -6,6 +6,7 @@ use Tienda\App\Controllers\UserController;
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $router) {
 
     $router->get('/', [DocumentController::class, 'index']);
+    $router->get('/admin-panel', [DocumentController::class, 'adminPanel']);
     $router->get('/register', [DocumentController::class, 'register']);
     $router->post('/register-data', [UserController::class, 'register']);
     $router->get('/login', [DocumentController::class, 'login']);
@@ -21,6 +22,9 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $router->post('/edit-username-data', [UserController::class, 'editUsername']);
     $router->get('/edit-phone', [DocumentController::class, 'editPhone']);
     $router->post('/edit-phone-data', [UserController::class, 'editPhone']);
+    $router->get('/all-users', [DocumentController::class, 'allUsers']);
+    $router->get('/all-supervisors', [DocumentController::class, 'allSupervisors']);
+    $router->get('/all-products', [DocumentController::class, 'allProducts']);
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];

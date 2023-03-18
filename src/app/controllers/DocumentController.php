@@ -18,6 +18,16 @@ class DocumentController extends Controller
         $this->render('index');
     }
 
+    public function adminPanel()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            $this->route('/login');
+            exit;
+        }
+
+        $this->render('adminPanel');
+    }
+
     public function login()
     {
         $this->render('login');
@@ -91,5 +101,83 @@ class DocumentController extends Controller
         $data = ['user' => $user[0]];
 
         $this->render('userProfile', $data);
+    }
+
+    public function allUsers()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            $this->route('/login');
+            exit;
+        }
+
+        if ($_SESSION['user_id'] == 3) {
+            $this->route('/');
+            exit;
+        }
+
+        $db = new DB();
+        $pdo = $db->connect();
+
+        // Gets all usernames with role of client.
+        $statement = $pdo->prepare("SELECT username FROM user WHERE role_id = 3");
+        $statement->execute();
+
+        $users = $statement->fetchAll();
+
+        $data = ['users' => $users[0]];
+
+        $this->render('allUsers', $data);
+    }
+
+    public function allSupervisors()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            $this->route('/login');
+            exit;
+        }
+
+        if ($_SESSION['user_id'] == 3) {
+            $this->route('/');
+            exit;
+        }
+
+        $db = new DB();
+        $pdo = $db->connect();
+
+        // Gets all usernames with role of supervisor.
+        $statement = $pdo->prepare("SELECT username FROM user WHERE role_id = 2");
+        $statement->execute();
+
+        $supervisors = $statement->fetchAll();
+
+        $data = ['supervisors' => $supervisors[0]];
+
+        $this->render('allSupervisors', $data);
+    }
+
+    public function allProducts()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            $this->route('/login');
+            exit;
+        }
+
+        if ($_SESSION['user_id'] == 3) {
+            $this->route('/');
+            exit;
+        }
+
+        $db = new DB();
+        $pdo = $db->connect();
+
+        // Gets all products.
+        $statement = $pdo->prepare("SELECT * FROM product");
+        $statement->execute();
+
+        $products = $statement->fetchAll();
+
+        $data = ['products' => $products[0]];
+
+        $this->render('allProducts', $data);
     }
 }
