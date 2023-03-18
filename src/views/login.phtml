@@ -15,9 +15,15 @@
             <h1>Login</h1>
         </header>
         <main>
-            <form action="/login-data" method="POST">
-                <input type="email" name="email" />
-                <input type="password" name="password" />
+            <form class="login-form" action="/login-data" method="POST">
+                <div>
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" />
+                </div>
+                <div>
+                    <label for="password">Contraseña</label>
+                    <input id="password" type="password" name="password" />
+                </div>
                 <button type="submit">Entrar</button>
             </form>
         </main>

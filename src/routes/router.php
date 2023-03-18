@@ -7,6 +7,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
 
     $router->get('/', [DocumentController::class, 'index']);
     $router->get('/register', [DocumentController::class, 'register']);
+    $router->post('/register-data', [UserController::class, 'register']);
     $router->get('/login', [DocumentController::class, 'login']);
     $router->post('/login-data', [UserController::class, 'login']);
     $router->get('/user-profile', [DocumentController::class, 'userProfile']);

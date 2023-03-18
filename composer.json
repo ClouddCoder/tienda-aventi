@@ -2,7 +2,8 @@
     "autoload": {
         "psr-4": {
             "Tienda\\App\\Controllers\\": "src/app/controllers",
-            "Tienda\\App\\Libs\\": "src/app/libs"
+            "Tienda\\App\\Libs\\": "src/app/libs",
+            "Tienda\\App\\Models\\": "src/app/models"
         }
     },
     "require": {

@@ -15,11 +15,23 @@
             <h1>Registrarse</h1>
         </header>
         <main>
-            <form action="">
-                <input type="text" name="username" />
-                <input type="text" name="telefono" />
-                <input type="email" name="email" />
-                <input type="password" name="password" />
+            <form class="register-form" action="/register-data" method="POST">
+                <div>
+                    <label for="username">Nombre de usuario</label>
+                    <input id="username" type="text" name="username" />
+                </div>
+                <div>
+                    <label for="phone">Telefono</label>
+                    <input id="phone" type="text" name="phone" />
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" />
+                </div>
+                <div>
+                    <label for="password">Contraseña</label>
+                    <input id="password" type="password" name="password" />
+                </div>
                 <button type="submit">Registrarse</button>
             </form>
         </main>

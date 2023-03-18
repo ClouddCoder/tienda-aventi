@@ -1,9 +1,9 @@
 <?php
 
-namespace Models;
+namespace Tienda\App\Models;
 
-require __DIR__ . '/../../vendor/autoload.php';
-$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
+require __DIR__ . '/../../../vendor/autoload.php';
+$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../');
 $dotenv->load();
 
 class DB
@@ -23,7 +23,7 @@ class DB
         $this->port = $_ENV['DB_PORT'];
     }
 
-    function connect()
+    public function connect()
     {
         try {
             $dns = "mysql:dbname={$this->db};host={$this->host}";
