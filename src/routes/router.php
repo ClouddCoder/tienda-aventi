@@ -29,6 +29,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $router->get('/all-products', [DocumentController::class, 'allProducts']);
     $router->post('/create-product', [ProductController::class, 'createProduct']);
     $router->post('/delete-product', [ProductController::class, 'deleteProduct']);
+    $router->post('/set-product-status', [ProductController::class, 'setProductStatus']);
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];

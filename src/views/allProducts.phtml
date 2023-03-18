@@ -52,9 +52,15 @@
                                 <input type="hidden" name="id" value="<?= $product['id'] ?>" />
                                 <button type="submit">Eliminar</button>
                             </form>
-                            <form action="/disable-product" method="POST">
+                            <form action="/set-product-status" method="POST">
                                 <input type="hidden" name="id" value="<?= $product['id'] ?>" />
-                                <button type="submit">Deshabilitar</button>
+                                <?php if ($product['status'] == 'enabled') : ?>
+                                    <input type="hidden" name="status" value="disabled" />
+                                    <button type="submit">Deshabilitar</button>
+                                <?php else : ?>
+                                    <input type="hidden" name="status" value="enabled" />
+                                    <button type="submit">Habilitar</button>
+                                <?php endif; ?>
                             </form>
                         </div>
                     <?php endforeach; ?>
