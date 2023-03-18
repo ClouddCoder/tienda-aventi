@@ -41,7 +41,7 @@ class DocumentController extends Controller
 
         // Gets all products.
         $statement = $pdo->prepare(
-            "SELECT * FROM product
+            "SELECT product.* FROM product
             INNER JOIN shopping_cart ON product.id = shopping_cart.product_id
             WHERE shopping_cart.user_id = :user_id"
         );

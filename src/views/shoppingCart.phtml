@@ -24,6 +24,7 @@
                         <section>
                             <img style="width:200px" src=<?= './assets/' . $product['name'] . '.jpeg' ?> alt="producto">
                             <div>
+                                <span>product_id: <?= $product['id'] ?></span>
                                 <span>Nombre: <?= $product['name'] ?></span>
                                 <span>Precio: <?= $product['price'] ?></span>
                                 <span>Stock: <?= $product['stock'] ?></span>
@@ -31,6 +32,8 @@
                         </section>
                         <form action="/buy-product" method="POST">
                             <input type="hidden" name="id" value="<?= $product['id'] ?>" />
+                            <input type="hidden" name="stock" value="<?= $product['stock'] ?>" />
+                            <input type="number" name="quantity" placeholder="Cantidad" />
                             <button type="submit">Comprar</button>
                         </form>
                         <form action="/remove-from-shopping-cart" method="POST">
