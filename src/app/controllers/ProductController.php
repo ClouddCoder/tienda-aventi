@@ -105,4 +105,39 @@ class ProductController extends Controller
                 </script>';
         }
     }
+
+    public function addToShoppingCart(array $request)
+    {
+        $db = new DB();
+        $pdo = $db->connect();
+
+        $statement = $pdo->prepare("INSERT INTO shopping_cart (user_id, product_id) VALUES (:user_id, :product_id)");
+
+        $statement->execute([
+            'user_id' => $_SESSION['user_id'],
+            'product_id' => $request['id']
+        ]);
+
+        $count = $statement->rowCount();
+
+        // If the statement was executed successfully and the product exists.
+        if ($statement) {
+            if ($count > 0) {
+                echo '<script>
+                    alert("Producto agregado al carrito");
+                    window.location.href = "/";
+                    </script>';
+            } else {
+                echo '<script>
+                    alert("El producto no existe");
+                    window.location.href = "/";
+                    </script>';
+            }
+        } else {
+            echo '<script>
+                alert("Error al agregar el producto al carrito");
+                window.location.href = "/";
+                </script>';
+        }
+    }
 }

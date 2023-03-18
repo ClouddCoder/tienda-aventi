@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Todos los productos</h1>
+            <a href="/shopping-cart">Carrito</a>
+        </header>
+        <main>
+            <?php if (empty($products)) : ?>
+                <p>No hay productos.</p>
+            <?php else : ?>
+                <?php foreach ($products as $product) : ?>
+                    <div class="user">
+                        <section>
+                            <img src="" alt="producto">
+                            <div>
+                                <span>Nombre: <?= $product['name'] ?></span>
+                                <span>Precio: <?= $product['price'] ?></span>
+                                <span>Stock: <?= $product['stock'] ?></span>
+                            </div>
+                        </section>
+                        <form action="/buy-product" method="POST">
+                            <input type="hidden" name="id" value="<?= $product['id'] ?>" />
+                            <button type="submit">Comprar</button>
+                        </form>
+                        <form action="/add-to-shopping-cart" method="POST">
+                            <input type="hidden" name="id" value="<?= $product['id'] ?>" />
+                            <button type="submit">Agregar al carrito</button>
+                        </form>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </main>
+    </div>
+</body>
+
+</html>

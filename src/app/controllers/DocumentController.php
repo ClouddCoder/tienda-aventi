@@ -8,14 +8,51 @@ use Tienda\App\Models\DB;
 class DocumentController extends Controller
 {
 
-    public function index()
+    public function getEnabledProducts()
     {
         if (!isset($_SESSION['user_id'])) {
             $this->route('/login');
             exit;
         }
 
-        $this->render('index');
+        $db = new DB();
+        $pdo = $db->connect();
+
+        // Gets all products.
+        $statement = $pdo->prepare("SELECT * FROM product WHERE status = 'enabled'");
+        $statement->execute();
+
+        $products = $statement->fetchAll();
+
+        $data = ['products' => $products ?? []];
+
+        $this->render('index', $data);
+    }
+
+    public function shoppingCart()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            $this->route('/login');
+            exit;
+        }
+
+        $db = new DB();
+        $pdo = $db->connect();
+
+        // Gets all products.
+        $statement = $pdo->prepare(
+            "SELECT * FROM product
+            INNER JOIN shopping_cart ON product.id = shopping_cart.product_id
+            WHERE shopping_cart.user_id = :user_id"
+        );
+
+        $statement->execute(['user_id' => $_SESSION['user_id']]);
+
+        $products = $statement->fetchAll();
+
+        $data = ['products' => $products ?? []];
+
+        $this->render('shoppingCart', $data);
     }
 
     public function adminPanel()

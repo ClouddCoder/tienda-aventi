@@ -6,7 +6,10 @@ use Tienda\App\Controllers\ProductController;
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $router) {
 
-    $router->get('/', [DocumentController::class, 'index']);
+    $router->get('/', [DocumentController::class, 'getEnabledProducts']);
+    $router->get('/shopping-cart', [DocumentController::class, 'shoppingCart']);
+    $router->post('/buy-product', [ProductController::class, 'buyProduct']);
+    $router->post('/add-to-shopping-cart', [ProductController::class, 'addToShoppingCart']);
     $router->get('/admin-panel', [DocumentController::class, 'adminPanel']);
     $router->get('/register', [DocumentController::class, 'register']);
     $router->post('/register-data', [UserController::class, 'register']);
