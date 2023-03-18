@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/global.css">
+    <title>Factura</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Factura</h1>
+            <a href="/">Seguir comprando</a>
+        </header>
+        <main>
+            <?php if (empty($products)) : ?>
+                <p>No hay Factura.</p>
+            <?php else : ?>
+                <div class="invoice">
+                    <div>
+                        <span>Factura: <?= $products[0]['id'] ?></span>
+                    </div>
+                    <div>
+                        <span>Comprador: <?= $products[0]['username'] ?></span>
+                    </div>
+                    <?php foreach ($products as $product) : ?>
+                        <div class=" product">
+                            <div>
+                                <span>Producto: <?= $product['name'] ?></span>
+                                <span>Cantidad: <?= $product['quantity'] ?></span>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </main>
+    </div>
+</body>
+
+</html>

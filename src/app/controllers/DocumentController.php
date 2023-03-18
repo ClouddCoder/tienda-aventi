@@ -217,4 +217,34 @@ class DocumentController extends Controller
 
         $this->render('allProducts', $data);
     }
+
+    public function invoice()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            $this->route('/login');
+            exit;
+        }
+
+        $db = new DB();
+        $pdo = $db->connect();
+
+        $statement = $pdo->prepare(
+            "SELECT user.username, product.name, product.price, invoice.id, product_purchased.quantity
+            FROM product
+            INNER JOIN product_purchased ON product.id = product_purchased.product_id
+            INNER JOIN invoice ON product_purchased.invoice_id = invoice.id
+            INNER JOIN user ON invoice.user_id = user.id
+            WHERE user.id = :user_id
+            ORDER BY invoice.id DESC
+            LIMIT 1"
+        );
+
+        $statement->execute(['user_id' => $_SESSION['user_id']]);
+
+        $products = $statement->fetchAll();
+
+        $data = ['products' => $products ?? []];
+
+        $this->render('invoice', $data);
+    }
 }

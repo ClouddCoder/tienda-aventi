@@ -225,7 +225,7 @@ class ProductController extends Controller
             if ($count > 0) {
                 echo '<script>
                     alert("Producto comprado");
-                    window.location.href = "/";
+                    window.location.href = "/invoice";
                     </script>';
             } else {
                 echo '<script>
