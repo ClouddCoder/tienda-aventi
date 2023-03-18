@@ -21,15 +21,18 @@
             </section>
             <section>
                 <h3>Nombre de usuario</h3>
-                <span>Admin</span>
+                <span><?= $user['username'] ?></span>
+                <a href="/edit-email">Cambiar</a>
             </section>
             <section>
                 <h3>Telefono</h3>
-                <span>12345</span>
+                <span><?= $user['phone'] ?></span>
+                <a href="/edit-phone">Cambiar</a>
             </section>
             <section>
                 <h3>Email</h3>
-                <span>admin@admin.com</span>
+                <span><?= $user['email'] ?></span>
+                <a href="/edit-email">Cambiar</a>
             </section>
             <section>
                 <h3>Contraseña</h3>

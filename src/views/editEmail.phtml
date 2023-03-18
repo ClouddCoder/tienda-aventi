@@ -15,8 +15,11 @@
             <h1>Actualizar Email</h1>
         </header>
         <main>
-            <form action="/edit-email-data" method="PUT">
-                <input type="email" name="email" />
+            <form class="edit-email-form" action="/edit-email-data" method="POST">
+                <div>
+                    <label for="email">Nuevo email</label>
+                    <input id="email" type="email" name="email" />
+                </div>
                 <button type="submit">Actualizar</button>
             </form>
         </main>

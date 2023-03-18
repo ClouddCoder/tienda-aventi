@@ -3,6 +3,7 @@
 namespace Tienda\App\Controllers;
 
 use Tienda\App\Libs\Controller;
+use Tienda\App\Models\DB;
 
 class DocumentController extends Controller
 {
@@ -79,6 +80,16 @@ class DocumentController extends Controller
             exit;
         }
 
-        $this->render('userProfile');
+        $db = new DB();
+        $pdo = $db->connect();
+
+        $statement = $pdo->prepare("SELECT * FROM user WHERE id = :id");
+        $statement->execute(['id' => $_SESSION['user_id']]);
+
+        $user = $statement->fetchAll();
+
+        $data = ['user' => $user[0]];
+
+        $this->render('userProfile', $data);
     }
 }

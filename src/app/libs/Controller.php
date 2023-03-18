@@ -4,8 +4,10 @@ namespace Tienda\App\Libs;
 
 class Controller extends Redirect
 {
-    protected function render(string $path): void
+    protected function render(string $path, array $data = []): void
     {
+        extract($data);
+
         if ($this->verifyPath($path)) {
             require_once __DIR__ . '/../../views/' . $path . '.phtml';
         }

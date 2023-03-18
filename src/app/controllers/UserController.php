@@ -105,8 +105,30 @@ class UserController extends Controller
         $email = $request['email'];
         $user_id = $_SESSION['user_id'];
 
-        $statement = $pdo->prepare('UPDATE users SET email = :email WHERE id = :user_id');
+        $statement = $pdo->prepare('UPDATE user SET email = :email WHERE user.id = :user_id');
         $statement->execute(['email' => $email, 'user_id' => $user_id]);
+
+        $count = $statement->rowCount();
+
+        // If the statement was executed successfully and the email is different from the current one.
+        if ($statement) {
+            if ($count > 0) {
+                echo '<script>
+                    alert("Email actualizado");
+                    window.location.href = "/user-profile";
+                    </script>';
+            } else {
+                echo '<script>
+                    alert("El email tiene que ser diferente al actual");
+                    window.location.href = "/edit-email";
+                    </script>';
+            }
+        } else {
+            echo '<script>
+                alert("Error al actualizar email");
+                window.location.href = "/edit-email";
+                </script>';
+        }
 
         $this->render('user-profile');
     }
