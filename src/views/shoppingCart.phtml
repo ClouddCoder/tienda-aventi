@@ -31,9 +31,9 @@
                             <input type="hidden" name="id" value="<?= $product['id'] ?>" />
                             <button type="submit">Comprar</button>
                         </form>
-                        <form action="/add-to-shopping-cart" method="POST">
+                        <form action="/remove-from-shopping-cart" method="POST">
                             <input type="hidden" name="id" value="<?= $product['id'] ?>" />
-                            <button type="submit">Agregar al carrito</button>
+                            <button type="submit">Eliminar</button>
                         </form>
                     </div>
                 <?php endforeach; ?>

@@ -10,6 +10,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $router->get('/shopping-cart', [DocumentController::class, 'shoppingCart']);
     $router->post('/buy-product', [ProductController::class, 'buyProduct']);
     $router->post('/add-to-shopping-cart', [ProductController::class, 'addToShoppingCart']);
+    $router->post('/remove-from-shopping-cart', [ProductController::class, 'removeFromShoppingCart']);
     $router->get('/admin-panel', [DocumentController::class, 'adminPanel']);
     $router->get('/register', [DocumentController::class, 'register']);
     $router->post('/register-data', [UserController::class, 'register']);

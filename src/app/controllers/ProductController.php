@@ -140,4 +140,39 @@ class ProductController extends Controller
                 </script>';
         }
     }
+
+    public function removeFromShoppingCart(array $request)
+    {
+        $db = new DB();
+        $pdo = $db->connect();
+
+        $statement = $pdo->prepare("DELETE FROM shopping_cart WHERE user_id = :user_id AND product_id = :product_id");
+
+        $statement->execute([
+            'user_id' => $_SESSION['user_id'],
+            'product_id' => $request['id']
+        ]);
+
+        $count = $statement->rowCount();
+
+        // If the statement was executed successfully and the product exists.
+        if ($statement) {
+            if ($count > 0) {
+                echo '<script>
+                    alert("Producto eliminado del carrito");
+                    window.location.href = "/shopping-cart";
+                    </script>';
+            } else {
+                echo '<script>
+                    alert("El producto no existe");
+                    window.location.href = "/shopping-cart";
+                    </script>';
+            }
+        } else {
+            echo '<script>
+                alert("Error al eliminar el producto del carrito");
+                window.location.href = "/shopping-cart";
+                </script>';
+        }
+    }
 }
