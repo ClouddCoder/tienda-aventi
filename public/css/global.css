@@ -36,3 +36,8 @@ main {
   align-items: center;
   justify-content: center;
 }
+
+.user-main-buttons {
+  display: flex;
+  justify-content: space-between;
+}
