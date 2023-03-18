@@ -29,3 +29,5 @@ docker compose up
 ```
 
 4. Abrir el navegador preferido y acceder al link `localhost:<PUERTO_DEL_SERVIDOR_PHP>`.
+
+5. Para iniciar sesión como gerente, se debe ingresar el email `gerente@gerente.com` con contraseña `gerente`.
