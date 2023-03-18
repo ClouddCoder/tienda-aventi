@@ -132,4 +132,112 @@ class UserController extends Controller
 
         $this->render('user-profile');
     }
+
+    public function editPassword(array $request)
+    {
+        $db = new DB();
+        $pdo = $db->connect();
+
+        $password = $request['password'];
+        $user_id = $_SESSION['user_id'];
+
+        $statement = $pdo->prepare('UPDATE user SET password = :password WHERE user.id = :user_id');
+        $statement->execute(['password' => $password, 'user_id' => $user_id]);
+
+        $count = $statement->rowCount();
+
+        // If the statement was executed successfully and the password is different from the current one.
+        if ($statement) {
+            if ($count > 0) {
+                echo '<script>
+                    alert("Contraseña actualizada");
+                    window.location.href = "/user-profile";
+                    </script>';
+            } else {
+                echo '<script>
+                    alert("La contraseña tiene que ser diferente a la actual");
+                    window.location.href = "/edit-password";
+                    </script>';
+            }
+        } else {
+            echo '<script>
+                alert("Error al actualizar contraseña");
+                window.location.href = "/edit-password";
+                </script>';
+        }
+
+        $this->render('user-profile');
+    }
+
+    public function editPhone(array $request)
+    {
+        $db = new DB();
+        $pdo = $db->connect();
+
+        $phone = $request['phone'];
+        $user_id = $_SESSION['user_id'];
+
+        $statement = $pdo->prepare('UPDATE user SET phone = :phone WHERE user.id = :user_id');
+        $statement->execute(['phone' => $phone, 'user_id' => $user_id]);
+
+        $count = $statement->rowCount();
+
+        // If the statement was executed successfully and the phone is different from the current one.
+        if ($statement) {
+            if ($count > 0) {
+                echo '<script>
+                    alert("Teléfono actualizado");
+                    window.location.href = "/user-profile";
+                    </script>';
+            } else {
+                echo '<script>
+                    alert("El teléfono tiene que ser diferente al actual");
+                    window.location.href = "/edit-phone";
+                    </script>';
+            }
+        } else {
+            echo '<script>
+                alert("Error al actualizar teléfono");
+                window.location.href = "/edit-phone";
+                </script>';
+        }
+
+        $this->render('user-profile');
+    }
+
+    public function editUsername(array $request)
+    {
+        $db = new DB();
+        $pdo = $db->connect();
+
+        $username = $request['username'];
+        $user_id = $_SESSION['user_id'];
+
+        $statement = $pdo->prepare('UPDATE user SET username = :username WHERE user.id = :user_id');
+        $statement->execute(['username' => $username, 'user_id' => $user_id]);
+
+        $count = $statement->rowCount();
+
+        // If the statement was executed successfully and the username is different from the current one.
+        if ($statement) {
+            if ($count > 0) {
+                echo '<script>
+                    alert("Nombre de usuario actualizado");
+                    window.location.href = "/user-profile";
+                    </script>';
+            } else {
+                echo '<script>
+                    alert("El nombre de usuario tiene que ser diferente al actual");
+                    window.location.href = "/edit-username";
+                    </script>';
+            }
+        } else {
+            echo '<script>
+                alert("Error al actualizar nombre de usuario");
+                window.location.href = "/edit-username";
+                </script>';
+        }
+
+        $this->render('user-profile');
+    }
 }

@@ -16,8 +16,11 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $router->get('/edit-email', [DocumentController::class, 'editEmail']);
     $router->post('/edit-email-data', [UserController::class, 'editEmail']);
     $router->get('/edit-password', [DocumentController::class, 'editPassword']);
+    $router->post('/edit-password-data', [UserController::class, 'editPassword']);
     $router->get('/edit-username', [DocumentController::class, 'editUsername']);
+    $router->post('/edit-username-data', [UserController::class, 'editUsername']);
     $router->get('/edit-phone', [DocumentController::class, 'editPhone']);
+    $router->post('/edit-phone-data', [UserController::class, 'editPhone']);
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];
