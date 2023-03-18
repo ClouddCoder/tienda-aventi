@@ -14,7 +14,52 @@
             <h1>Todos los productos</h1>
         </header>
         <main>
-
+            <form class="create-product-form" action="/create-product" method="POST">
+                <div>
+                    <label for="name">Nombre producto</label>
+                    <input id="name" type="text" name="name" />
+                </div>
+                <div>
+                    <label for="price">Precio</label>
+                    <input id="price" type="number" name="price" />
+                </div>
+                <div>
+                    <label for="stock">Stock</label>
+                    <input id="stock" type="number" name="stock" />
+                </div>
+                <div>
+                    <label for="status">Status</label>
+                    <input id="status" type="text" name="status" />
+                </div>
+                <button type="submit">Crear</button>
+            </form>
+            <section>
+                <?php if (empty($products)) : ?>
+                    <p>No hay usuarios registrados.</p>
+                <?php else : ?>
+                    <?php foreach ($products as $product) : ?>
+                        <div class="user">
+                            <section>
+                                <img src="" alt="producto">
+                                <div>
+                                    <span>Nombre: <?= $product['name'] ?></span>
+                                    <span>Precio: <?= $product['price'] ?></span>
+                                    <span>Stock: <?= $product['stock'] ?></span>
+                                    <span>Status: <?= $product['status'] ?></span>
+                                </div>
+                            </section>
+                            <form action="/delete-product" method="POST">
+                                <input type="hidden" name="id" value="<?= $product['id'] ?>" />
+                                <button type="submit">Eliminar</button>
+                            </form>
+                            <form action="/disable-product" method="POST">
+                                <input type="hidden" name="id" value="<?= $product['id'] ?>" />
+                                <button type="submit">Deshabilitar</button>
+                            </form>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </section>
         </main>
     </div>
 </body>

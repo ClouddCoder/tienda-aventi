@@ -18,7 +18,8 @@ body {
 .register-form,
 .login-form,
 .forgot-password-form,
-.edit-email-form {
+.edit-email-form,
+.create-product-form {
   width: 100%;
   min-height: 100%;
   display: flex;

@@ -20,5 +20,6 @@ CREATE TABLE product (
     name VARCHAR(255) NOT NULL,
     price INT NOT NULL,
     stock INT NOT NULL,
+    status VARCHAR(25) NOT NULL,
     PRIMARY KEY (id)
 );

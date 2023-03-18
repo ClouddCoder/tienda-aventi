@@ -2,6 +2,7 @@
 
 use Tienda\App\Controllers\DocumentController;
 use Tienda\App\Controllers\UserController;
+use Tienda\App\Controllers\ProductController;
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $router) {
 
@@ -26,8 +27,8 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $router->post('/delete-user', [UserController::class, 'deleteUser']);
     $router->get('/all-supervisors', [DocumentController::class, 'allSupervisors']);
     $router->get('/all-products', [DocumentController::class, 'allProducts']);
-    $router->post('/create-product', [UserController::class, 'createProduct']);
-    $router->post('/delete-product', [UserController::class, 'deleteProduct']);
+    $router->post('/create-product', [ProductController::class, 'createProduct']);
+    $router->post('/delete-product', [ProductController::class, 'deleteProduct']);
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];
