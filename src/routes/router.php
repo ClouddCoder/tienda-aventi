@@ -25,8 +25,8 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $rou
     $router->get('/all-users', [DocumentController::class, 'allUsers']);
     $router->post('/delete-user', [UserController::class, 'deleteUser']);
     $router->get('/all-supervisors', [DocumentController::class, 'allSupervisors']);
-    $router->post('/delete-supervisor', [UserController::class, 'deleteSupervisor']);
     $router->get('/all-products', [DocumentController::class, 'allProducts']);
+    $router->post('/create-product', [UserController::class, 'createProduct']);
     $router->post('/delete-product', [UserController::class, 'deleteProduct']);
 });
 

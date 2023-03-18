@@ -14,7 +14,43 @@
             <h1>Todos los supervisores</h1>
         </header>
         <main>
-
+            <form class="register-form" action="/register-data" method="POST">
+                <!-- This is the id of the supervisor role. -->
+                <input type="hidden" name="id" value=2 />
+                <div>
+                    <label for="username">Username del supervisor</label>
+                    <input id="username" type="text" name="username" />
+                </div>
+                <div>
+                    <label for="phone">Telefono</label>
+                    <input id="phone" type="text" name="phone" />
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" />
+                </div>
+                <div>
+                    <label for="password">Contraseña</label>
+                    <input id="password" type="password" name="password" />
+                </div>
+                <button type="submit">Registrarse</button>
+            </form>
+            <section>
+                <?php if (empty($supervisors)) : ?>
+                    <p>No hay usuarios registrados.</p>
+                <?php else : ?>
+                    <?php foreach ($supervisors as $supervisor) : ?>
+                        <div class="user">
+                            <h2><?= $supervisor['username'] ?></h2>
+                            <form action="/delete-user" method="POST">
+                                <input type="hidden" name="role-id" value=2 />
+                                <input type="hidden" name="id" value="<?= $supervisor['id'] ?>" />
+                                <button type="submit">Eliminar</button>
+                            </form>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </section>
         </main>
     </div>
 </body>

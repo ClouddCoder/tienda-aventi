@@ -44,7 +44,7 @@ class UserController extends Controller
         $statement = $pdo->prepare("INSERT INTO user (role_id, username, phone, email, password) VALUES (:role_id, :username, :phone, :email, :password)");
 
         $statement->execute([
-            'role_id' => 3,
+            'role_id' => $request['id'] ?? 3,
             'username' => $request['username'],
             'phone' => $request['phone'],
             'email' => $request['email'],
@@ -58,6 +58,12 @@ class UserController extends Controller
         $userId = $lastInsert->fetchAll();
 
         if ($userId) {
+            // If the registered user is a supervisor.
+            if ($request['id'] == 2) {
+                $this->route('/all-supervisors');
+                exit;
+            }
+
             $_SESSION['user_id'] = $userId[0]['LAST_INSERT_ID()'];
 
             $this->route('/user-profile');
@@ -135,8 +141,6 @@ class UserController extends Controller
                 window.location.href = "/edit-email";
                 </script>';
         }
-
-        $this->render('user-profile');
     }
 
     public function editPassword(array $request)
@@ -171,8 +175,6 @@ class UserController extends Controller
                 window.location.href = "/edit-password";
                 </script>';
         }
-
-        $this->render('user-profile');
     }
 
     public function editPhone(array $request)
@@ -207,8 +209,6 @@ class UserController extends Controller
                 window.location.href = "/edit-phone";
                 </script>';
         }
-
-        $this->render('user-profile');
     }
 
     public function editUsername(array $request)
@@ -243,42 +243,48 @@ class UserController extends Controller
                 window.location.href = "/edit-username";
                 </script>';
         }
-
-        $this->render('user-profile');
     }
 
     public function deleteUser(array $request)
     {
         $db = new DB();
         $pdo = $db->connect();
+        $url = "";
 
         $user_id = $request['id'];
+        $role_id = $request['role-id'];
 
         $statement = $pdo->prepare('DELETE FROM user WHERE user.id = :user_id');
         $statement->execute(['user_id' => $user_id]);
 
         $count = $statement->rowCount();
 
+        switch ($role_id) {
+            case 2:
+                $url = "/all-supervisors";
+                break;
+            default:
+                $url = "/all-users";
+        }
+
         // If the statement was executed successfully and the user exists.
         if ($statement) {
             if ($count > 0) {
                 echo '<script>
                     alert("Usuario eliminado");
-                    window.location.href = "/all-users";
+                    window.location.href = "' . $url . '";
                     </script>';
             } else {
                 echo '<script>
                     alert("El usuario no existe");
-                    window.location.href = "/all-users";
+                    window.location.href = "' . $url . '";
                     </script>';
             }
         } else {
             echo '<script>
                 alert("Error al eliminar usuario");
-                window.location.href = "/all-users";
+                window.location.href = "' . $url . '";
                 </script>';
         }
-
-        $this->render('user-profile');
     }
 }
